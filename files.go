@@ -282,12 +282,6 @@ func (api *Client) UploadFile(params FileUploadParameters) (file *File, err erro
 
 // UploadFileContext uploads a file and setting a custom context
 func (api *Client) UploadFileContext(ctx context.Context, params FileUploadParameters) (file *File, err error) {
-	// Test if user token is valid. This helps because client.Do doesn't like this for some reason. XXX: More
-	// investigation needed, but for now this will do.
-	_, err = api.AuthTest()
-	if err != nil {
-		return nil, err
-	}
 	response := &fileResponseFull{}
 	values := url.Values{
 		"token": {api.token},
